@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@plugin "@tailwindcss/typography";
+@source "../../node_modules/flowbite";
+@source '../views';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+@theme {
+    /* màu chủ đạo */
+    --color-brand-black: #0d0d0d;
+    --color-brand-white: #ffffff;
+    --color-brand-gray: #111827;
+
+    /* xanh dương */
+    --color-brand-blue-500: #2563eb;
+    /* chính */
+    --color-brand-blue-600: #1e40af;
+    /* hover/dark */
+    --color-brand-blue-400: #3b82f6;
+    /* nhạt hơn */
+
+    /* ===== PRIMARY – Navy Blue ===== */
+    --color-primary-50: #F0F5FF;
+    --color-primary-100: #E0EAFF;
+    --color-primary-200: #C7D8FF;
+    --color-primary-300: #A5BEFF;
+    --color-primary-400: #7A9EFF;
+    --color-primary-500: #4F7DFF;
+    --color-primary-600: #1D4ED8;
+    /* dùng nhiều */
+    --color-primary-700: #1E40AF;
+    --color-primary-800: #1E3A8A;
+    --color-primary-900: #0F172A;
+    /* Navy đậm – brand chính */
+
+    /* ===== ACCENT – CTA (Đỏ bán hàng) ===== */
+    --color-accent-500: #DC2626;
+    --color-accent-600: #B91C1C;
+
+    /* ===== NEUTRAL ===== */
+    --color-neutral-50: #F9FAFB;
+    --color-neutral-100: #F3F4F6;
+    --color-neutral-200: #E5E7EB;
+    --color-neutral-300: #D1D5DB;
+    --color-neutral-500: #6B7280;
+    --color-neutral-700: #374151;
+    --color-neutral-900: #111827;
+}
+
+@layer components {
+
+    /* nền chính */
+    .bg-main {
+        @apply bg-brand-white dark:bg-brand-black text-brand-black dark:text-brand-white;
+    }
+
+    /* chữ chính */
+    .text-main {
+        @apply text-brand-black dark:text-brand-white;
+    }
+
+    /* chữ phụ */
+    .text-sub {
+        @apply text-brand-gray dark:text-gray-400;
+    }
+
+    .bg-main-gray {
+        @apply bg-gray-200 dark:bg-gray-900 text-brand-black dark:text-brand-white;
+    }
+
+    /* button chính */
+    .btn-primary {
+        @apply bg-brand-blue-500 text-white font-medium rounded-lg px-5 py-2.5 hover:bg-brand-blue-600 transition-colors;
+    }
+
+    /* button phụ */
+    .btn-secondary {
+        @apply bg-brand-blue-400 text-white font-medium rounded-lg px-5 py-2.5 hover:bg-brand-blue-500 transition-colors;
+    }
+
+    /* card */
+    .card {
+        @apply bg-white dark:bg-brand-gray shadow-md rounded-lg;
+    }
+}
+
+
+.grid-view .car-card-grid {
+    display: block;
+}
+
+.grid-view .car-card-list {
+    display: none;
+}
+
+.list-view {
+    grid-template-columns: 1fr !important;
+}
+
+.list-view .car-card-grid {
+    display: none;
+}
+
+.list-view .car-card-list {
+    display: block;
+}
+
+/* Bookmark Active State */
+.bookmark-btn.active {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+}
+
+.bookmark-btn.active .bookmark-icon {
+    color: white !important;
+    fill: white;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toast-in {
+    from {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes toast-out {
+    from {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(30px) scale(0.95);
+    }
+}
+
+.animate-toast-in {
+    animation: toast-in 0.3s ease-out forwards;
+}
+
+.animate-toast-out {
+    animation: toast-out 0.25s ease-in forwards;
+}
+
+/* Custom Prose Styles for Rich Content */
+.prose {
+    color: inherit;
+    max-width: 65ch;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+    @apply text-brand-black dark:text-brand-white font-bold mb-4;
+}
+
+.prose h1 {
+    @apply text-3xl md:text-4xl mt-0;
+}
+
+.prose h2 {
+    @apply text-2xl md:text-3xl mt-8;
+}
+
+.prose h3 {
+    @apply text-xl md:text-2xl mt-6;
+}
+
+.prose p {
+    @apply text-brand-gray dark:text-gray-300 mb-4 leading-relaxed;
+}
+
+.prose ul, .prose ol {
+    @apply ml-6 mb-4 text-brand-gray dark:text-gray-300;
+}
+
+.prose ul {
+    @apply list-disc;
+}
+
+.prose ol {
+    @apply list-decimal;
+}
+
+.prose li {
+    @apply mb-2;
+}
+
+.prose a {
+    @apply text-brand-blue-500 hover:text-brand-blue-600 underline;
+}
+
+.prose strong {
+    @apply font-bold text-brand-black dark:text-brand-white;
+}
+
+.prose blockquote {
+    @apply border-l-4 border-brand-blue-500 pl-4 italic text-gray-700 dark:text-gray-400 my-4;
+}
+
+.prose img {
+    @apply rounded-lg my-6;
+}
+
+.prose table {
+    @apply w-full border-collapse mb-4;
+}
+
+.prose th, .prose td {
+    @apply border border-gray-300 dark:border-gray-700 px-4 py-2;
+}
+
+.prose th {
+    @apply bg-gray-100 dark:bg-gray-800 font-semibold;
+}
+
+.prose code {
+    @apply bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded text-sm;
+}
+
+.prose pre {
+    @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-lg overflow-x-auto mb-4;
+}
+
+.prose pre code {
+    @apply bg-transparent p-0;
+}
