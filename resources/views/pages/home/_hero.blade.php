@@ -14,12 +14,12 @@
                     Mạnh mẽ, bền bỉ, tiết kiệm nhiên liệu. Đáp ứng mọi nhu cầu vận chuyển hàng hóa của bạn với công nghệ hiện đại nhất.
                 </p>
                 <div class="flex flex-wrap gap-4">
-                    <button class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl transition transform hover:scale-105">
+                    <a href="{{ route("cars.index") }}" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-xl transition transform hover:scale-105">
                         Xem Sản Phẩm
-                    </button>
-                    <button class="border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-4 rounded-lg font-semibold text-lg transition">
+                    </a>
+                    <a href="{{ route("contact") }}" class="border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-4 rounded-lg font-semibold text-lg transition">
                         Tư Vấn Miễn Phí
-                    </button>
+                    </a>
                 </div>
 
                 <div class="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-gray-700">
