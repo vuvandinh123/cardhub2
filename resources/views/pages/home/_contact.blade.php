@@ -23,7 +23,7 @@
                         </div>
                         <div>
                             <h4 class="font-semibold text-gray-800 mb-1">Hotline</h4>
-                            <p class="text-orange-600 text-xl font-bold">1900 xxxx</p>
+                            <p class="text-orange-600 text-xl font-bold">Liên hệ 0961549241 Em Hợp</p>
                             <p class="text-gray-600 text-sm">Hỗ trợ 24/7</p>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                         </div>
                         <div>
                             <h4 class="font-semibold text-gray-800 mb-1">Email</h4>
-                            <p class="text-orange-600 text-lg font-semibold">info@truckpro.vn</p>
+                            <p class="text-orange-600 text-lg font-semibold">nguyenvanhop0403@icloud.com</p>
                             <p class="text-gray-600 text-sm">Phản hồi trong 24h</p>
                         </div>
                     </div>
