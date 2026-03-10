@@ -1,32 +1,11 @@
 services:
   # =============================================
-  # Nginx Reverse Proxy + Let's Encrypt
-  # =============================================
-  nginx-proxy:
-    image: nginxproxy/nginx-proxy:latest
-    container_name: nginx-proxy
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - certs:/etc/nginx/certs:ro
-      - vhost:/etc/nginx/vhost.d
-      - html:/usr/share/nginx/html
-      - ./docker/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
-    networks:
-      - web
-
-  # =============================================
   # Let's Encrypt Companion (auto SSL)
   # =============================================
   acme-companion:
     image: nginxproxy/acme-companion:latest
     container_name: acme-companion
     restart: always
-    depends_on:
-      - nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - certs:/etc/nginx/certs:rw
@@ -37,8 +16,7 @@ services:
       - DEFAULT_EMAIL=admin@howokiman.com
       - NGINX_PROXY_CONTAINER=nginx-proxy
     networks:
-      - web
-
+      - webproxy
   # =============================================
   # Laravel App (PHP-FPM + Nginx)
   # =============================================
@@ -60,7 +38,7 @@ services:
     env_file:
       - .env
     networks:
-      - web
+      - webproxy
       - internal
 
   # =============================================
@@ -91,7 +69,7 @@ volumes:
   acme:
 
 networks:
-  web:
-    driver: bridge
+  webproxy:
+    external: true
   internal:
     driver: bridge
