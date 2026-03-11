@@ -29,7 +29,9 @@ class Car extends Model
         'color_id',
         'origin_id',
         'engine',
-        'seats',
+        'horsepower',
+        'torque',
+        'fuel_consumption',
         'status',
         'description',
         'content',
@@ -38,7 +40,6 @@ class Car extends Model
         'meta_description',
         'meta_keywords',
         'fuel',
-        'bodytype',
     ];
 
     protected $casts = [
@@ -46,7 +47,6 @@ class Car extends Model
         'year' => 'integer',
         'quantity' => 'integer',
         'mileage' => 'integer',
-        'seats' => 'integer',
     ];
 
 

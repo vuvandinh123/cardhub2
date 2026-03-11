@@ -164,17 +164,14 @@
                                             <p class="text-xs font-semibold text-gray-500 uppercase">
                                                 {{ $car->brand->name ?? 'Không xác định' }}
                                             </p>
-                                            <p class="text-xs text-gray-500">
-                                                {{ $car->seats ? $car->seats . ' chỗ' : '' }}
-                                            </p>
                                         </div>
                                         <h3 class="text-sm md:text-base font-extrabold text-gray-900 mb-2 line-clamp-2">
                                             <a href="{{ route('cars.show', $car->slug) }}">{{ $car->title }}</a>
                                         </h3>
                                         <div class="grid grid-cols-3 gap-2 text-[11px] text-gray-600 mb-3">
-                                            <p>Năm: {{ $car->year ?? '—' }}</p>
-                                            <p>Nhiên liệu: {{ $car->fuel ?? '—' }}</p>
-                                            <p>Động cơ: {{ $car->engine ?? '—' }}</p>
+                                            <p>Mã lực: {{ $car->horsepower ?? '—' }}</p>
+                                            <p>Mô men: {{ $car->torque ?? '—' }}</p>
+                                            <p>Tiêu hao: {{ $car->fuel_consumption ?? '—' }}</p>
                                         </div>
                                         <div class="flex items-center justify-between mt-2">
                                             <div>
@@ -220,9 +217,6 @@
                                                 <p class="text-xs font-semibold text-gray-500 uppercase">
                                                     {{ $car->brand->name ?? 'Không xác định' }}
                                                 </p>
-                                                <p class="text-xs text-gray-500">
-                                                    {{ $car->seats ? $car->seats . ' chỗ' : '' }}
-                                                </p>
                                             </div>
                                             <h3 class="text-base md:text-xl font-extrabold text-gray-900 mb-2">
                                                 <a href="{{ route('cars.show', $car->slug) }}">{{ $car->title }}</a>
@@ -231,9 +225,9 @@
                                                 {{ $car->description ?? 'Mẫu xe được KIMAN kiểm tra kỹ lưỡng, phù hợp nhiều nhu cầu sử dụng khác nhau.' }}
                                             </p>
                                             <div class="grid grid-cols-3 gap-3 text-xs text-gray-600">
-                                                <p>Năm: {{ $car->year ?? '—' }}</p>
-                                                <p>Nhiên liệu: {{ $car->fuel ?? '—' }}</p>
-                                                <p>Động cơ: {{ $car->engine ?? '—' }}</p>
+                                                <p>Mã lực: {{ $car->horsepower ?? '—' }}</p>
+                                                <p>Mô men: {{ $car->torque ?? '—' }}</p>
+                                                <p>Tiêu hao: {{ $car->fuel_consumption ?? '—' }}</p>
                                             </div>
                                         </div>
                                         <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-3">

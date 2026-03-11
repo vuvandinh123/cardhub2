@@ -184,24 +184,22 @@ class CarForm
                                     ])
                                     ->helperText('Thông tin về loại nhiên liệu sử dụng'),
 
-                                TextInput::make('seats')
-                                    ->label('Số chỗ ngồi')
-                                    ->numeric()
-                                    ->minValue(1)
-                                    ->maxValue(50)
-                                    ->step(1)
-                                    ->placeholder('5')
-                                    ->suffix('chỗ'),
+                                TextInput::make('horsepower')
+                                    ->label('Mã lực')
+                                    ->placeholder('Ví dụ: 150 HP')
+                                    ->suffix('HP')
+                                    ->helperText('Công suất tối đa của xe'),
 
-                                Select::make('bodytype')
-                                    ->label('Loại hộp số')
-                                    ->options([
-                                        'Số sàn' => 'Số sàn',
-                                        'Tự động' => 'Tự động',
-                                    ])
-                                    ->default('Số sàn')
-                                    ->native(false)
-                                    ->helperText('Chọn loại hộp số của xe'),
+                                TextInput::make('torque')
+                                    ->label('Mô men xoắn')
+                                    ->placeholder('Ví dụ: 300 Nm')
+                                    ->suffix('Nm')
+                                    ->helperText('Mô men xoắn cực đại của xe'),
+
+                                TextInput::make('fuel_consumption')
+                                    ->label('Tiêu hao nhiên liệu')
+                                    ->placeholder('Ví dụ: 6.5L/100km')
+                                    ->helperText('Mức tiêu thụ nhiên liệu trung bình'),  
 
                                 Repeater::make('specifications')
                                     ->label('Chi tiết thông số kỹ thuật')

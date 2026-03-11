@@ -48,17 +48,23 @@
                             {{ $car->description ? Str::limit($car->description, 100) : 'Mẫu xe chất lượng cao, hiệu suất ổn định, phù hợp nhiều nhu cầu vận tải.' }}
                         </p>
 
-                        <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="grid grid-cols-3 gap-3 mb-4">
                             <div class="bg-white rounded-lg p-3">
-                                <p class="text-xs text-gray-500">Động cơ</p>
-                                <p class="font-bold text-gray-800">
-                                    {{ $car->engine ?? 'Đang cập nhật' }}
+                                <p class="text-xs text-gray-500">Mã lực</p>
+                                <p class="font-bold text-gray-800 text-sm">
+                                    {{ $car->horsepower ?? 'N/A' }}
                                 </p>
                             </div>
                             <div class="bg-white rounded-lg p-3">
-                                <p class="text-xs text-gray-500">Số chỗ</p>
-                                <p class="font-bold text-gray-800">
-                                    {{ $car->seats ? $car->seats . ' chỗ' : 'Đang cập nhật' }}
+                                <p class="text-xs text-gray-500">Mô men xoắn</p>
+                                <p class="font-bold text-gray-800 text-sm">
+                                    {{ $car->torque ?? 'N/A' }}
+                                </p>
+                            </div>
+                            <div class="bg-white rounded-lg p-3">
+                                <p class="text-xs text-gray-500">Tiêu hao NL</p>
+                                <p class="font-bold text-gray-800 text-sm">
+                                    {{ $car->fuel_consumption ?? 'N/A' }}
                                 </p>
                             </div>
                         </div>
