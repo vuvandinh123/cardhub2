@@ -1,6 +1,7 @@
 @php
     use App\Models\Category;
     use App\Models\Car;
+    use App\Models\AccessoryCategory;
 
     $headerCategories = $headerCategories
         ?? (class_exists(Category::class)
@@ -12,6 +13,17 @@
 
     $headerCategoriesTop = $headerCategories->whereNull('parent_id');
     $headerCategoriesChildren = $headerCategories->groupBy('parent_id');
+
+    $headerAccessoryCategories = class_exists(AccessoryCategory::class)
+        ? AccessoryCategory::query()
+            ->withCount('accessories')
+            ->where('is_active', true)
+            ->whereNull('parent_id')
+            ->orderBy('sort_order')
+            ->orderBy('name')
+            ->take(8)
+            ->get()
+        : collect();
 
     // Featured cars grouped by category for mega menu
     $featuredCarsByCategory = [];
@@ -50,40 +62,42 @@
 
                 <!-- Danh mục mega menu -->
                 <div class="relative group">
-                    <button type="button"
-                            class="relative inline-flex items-center gap-1 font-medium transition {{ request()->routeIs('categories.*') ? 'text-orange-600' : 'text-gray-700 hover:text-orange-600' }}">
+                    <a href="{{ route('categories.index') }}"
+                       class="relative inline-flex items-center gap-1 font-medium transition {{ request()->routeIs('categories.*') ? 'text-orange-600' : 'text-gray-700 hover:text-orange-600' }}">
                         <span>Danh Mục</span>
                         <span class="text-xs">▾</span>
                         @if(request()->routeIs('categories.*'))<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-500 rounded-full"></span>@endif
-                    </button>
+                    </a>
                     @if($headerCategoriesTop->count())
-                        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute -left-20 mt-3 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 z-50"
-                             style="width: max-content; max-width: 80vw;">
-                            <div class="flex gap-5 overflow-x-auto">
+                        <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 z-50"
+                             style="width: min(90vw, 960px);">
+                            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                                 @foreach($headerCategoriesTop as $cat)
                                     @php
                                         $children = $headerCategoriesChildren->get($cat->id) ?? collect();
                                         $count = $cat->cars_count ?? 0;
                                     @endphp
                                     <a href="{{ route('cars.index', ['category' => $cat->slug]) }}"
-                                       class="flex-shrink-0 w-44 group/card rounded-xl overflow-hidden border border-gray-100 hover:border-orange-300 hover:shadow-lg transition-all duration-200">
-                                        <div class="relative h-28 bg-gray-100 overflow-hidden">
+                                       class="group/card rounded-xl overflow-hidden border border-gray-100 hover:border-orange-300 hover:shadow-lg transition-all duration-200">
+                                        <div class="relative h-24 bg-gray-100 overflow-hidden">
                                             <img src="{{ $cat->thumbnail ? asset('storage/' . $cat->thumbnail) : 'https://via.placeholder.com/300x200?text=' . urlencode($cat->name) }}"
                                                  alt="{{ $cat->name }}"
-                                                 class="w-full h-full object-cover group-hover/card:scale-110 transition-transform duration-300">
+                                                 class="w-full h-full object-contain group-hover/card:scale-110 transition-transform duration-300">
                                             <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                                             <span class="absolute bottom-2 right-2 text-[10px] bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
                                                 {{ $count }} xe
                                             </span>
                                         </div>
-                                        <div class="p-3">
-                                            <p class="text-sm font-bold text-gray-800 group-hover/card:text-orange-600 transition truncate">
+                                        <div class="p-2.5">
+                                            <p class="text-sm font-bold text-gray-800 group-hover/card:text-orange-600 transition line-clamp-1">
                                                 {{ $cat->name }}
                                             </p>
                                             @if($children->count())
-                                                <p class="text-[11px] text-gray-500 truncate mt-1">
-                                                    {{ $children->take(3)->pluck('name')->join(', ') }}
+                                                <p class="text-[11px] text-gray-500 line-clamp-2 mt-1 min-h-[28px]">
+                                                    {{ $children->take(2)->pluck('name')->join(', ') }}
                                                 </p>
+                                            @else
+                                                <p class="text-[11px] text-gray-400 mt-1 min-h-[28px]">Xem sản phẩm theo danh mục</p>
                                             @endif
                                         </div>
                                     </a>
@@ -102,12 +116,12 @@
 
                 <!-- Sản phẩm mega menu -->
                 <div class="relative group">
-                    <button type="button"
-                            class="relative inline-flex items-center gap-1 font-medium transition {{ request()->routeIs('cars.*') ? 'text-orange-600' : 'text-gray-700 hover:text-orange-600' }}">
+                    <a href="{{ route('cars.index') }}"
+                       class="relative inline-flex items-center gap-1 font-medium transition {{ request()->routeIs('cars.*') ? 'text-orange-600' : 'text-gray-700 hover:text-orange-600' }}">
                         <span>Sản Phẩm</span>
                         <span class="text-xs">▾</span>
                         @if(request()->routeIs('cars.*'))<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-500 rounded-full"></span>@endif
-                    </button>
+                    </a>
                     @if($headerCategoriesTop->count())
                         <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 fixed left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 z-50"
                              style="width: min(90vw, 900px);">
@@ -150,6 +164,67 @@
                             </div>
                         </div>
                     @endif
+                </div>
+
+                <!-- Phụ kiện dropdown -->
+                <div class="relative group">
+                    <a href="{{ route('accessories.index') }}"
+                       class="relative inline-flex items-center gap-1 font-medium transition {{ request()->routeIs('accessories.*') ? 'text-orange-600' : 'text-gray-700 hover:text-orange-600' }}">
+                        <span>Phụ Kiện</span>
+                        <span class="text-xs">▾</span>
+                        @if(request()->routeIs('accessories.*'))<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-orange-500 rounded-full"></span>@endif
+                    </a>
+                    <div class="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 mt-3 bg-white rounded-2xl shadow-2xl border border-gray-100 p-5 z-50"
+                         style="width: min(90vw, 860px);">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-base font-bold text-gray-800">Danh mục phụ kiện</h3>
+                            <a href="{{ route('accessories.index') }}" class="text-sm text-orange-600 hover:text-orange-700 font-semibold">
+                                Xem tất cả →
+                            </a>
+                        </div>
+
+                        @if($headerAccessoryCategories->count())
+                            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                                @foreach($headerAccessoryCategories as $accCat)
+                                    @php
+                                        $accThumb = $accCat->thumbnail
+                                            ? asset('storage/' . ltrim($accCat->thumbnail, '/'))
+                                            : 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=600&h=420&fit=crop';
+                                    @endphp
+                                    <a href="{{ route('accessories.index', ['category' => $accCat->slug]) }}"
+                                       class="group/acc rounded-xl overflow-hidden border border-gray-100 hover:border-orange-300 hover:shadow-lg transition">
+                                        <div class="relative h-24 bg-gray-100 overflow-hidden">
+                                            <img src="{{ $accThumb }}" alt="{{ $accCat->name }}"
+                                                 class="w-full h-full object-cover group-hover/acc:scale-105 transition-transform duration-300">
+                                            <span class="absolute bottom-2 right-2 text-[10px] bg-orange-500 text-white px-2 py-0.5 rounded-full font-semibold">
+                                                {{ $accCat->accessories_count ?? 0 }} món
+                                            </span>
+                                        </div>
+                                        <div class="p-2.5">
+                                            <p class="text-sm font-bold text-gray-800 group-hover/acc:text-orange-600 line-clamp-1">
+                                                {{ $accCat->name }}
+                                            </p>
+                                            <p class="text-[11px] text-gray-500 mt-1 line-clamp-1">
+                                                Phụ kiện theo danh mục
+                                            </p>
+                                        </div>
+                                    </a>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-sm text-gray-500">Chưa có danh mục phụ kiện.</p>
+                        @endif
+
+                        <div class="mt-4 pt-3 border-t border-gray-100">
+                            <a href="{{ route('accessories.categories.index') }}"
+                               class="inline-flex items-center gap-1 text-sm text-orange-600 hover:text-orange-700 font-semibold">
+                                Đến trang danh mục phụ kiện
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 <a href="{{ route('posts.index') }}" class="relative font-medium transition {{ request()->routeIs('posts.*') ? 'text-orange-600' : 'text-gray-700 hover:text-orange-600' }}">
@@ -231,6 +306,41 @@
                             @endforeach
                         </div>
                     @endforeach
+                </div>
+
+                <!-- Mobile Phụ kiện -->
+                <button type="button"
+                        class="flex items-center justify-between px-2 py-2 rounded-lg font-medium {{ request()->routeIs('accessories.*') ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:bg-gray-50' }}"
+                        data-mobile-submenu-toggle="accessories">
+                    <span>Phụ Kiện</span>
+                    <span class="text-xs">▾</span>
+                </button>
+                <div class="hidden pb-2" data-mobile-submenu="accessories">
+                    <a href="{{ route('accessories.categories.index') }}" class="block px-3 py-2 text-xs font-semibold text-gray-700 hover:text-orange-600">
+                        Danh mục phụ kiện
+                    </a>
+                    <a href="{{ route('accessories.index') }}" class="block px-3 py-2 text-xs font-semibold text-gray-700 hover:text-orange-600">
+                        Tất cả phụ kiện
+                    </a>
+                    <div class="flex gap-3 overflow-x-auto py-2 px-1 -mx-1">
+                        @foreach($headerAccessoryCategories as $accCat)
+                            @php
+                                $accThumb = $accCat->thumbnail
+                                    ? asset('storage/' . ltrim($accCat->thumbnail, '/'))
+                                    : 'https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=300&h=200&fit=crop';
+                            @endphp
+                            <a href="{{ route('accessories.index', ['category' => $accCat->slug]) }}"
+                               class="flex-shrink-0 w-32 rounded-xl overflow-hidden border border-gray-100 hover:border-orange-300 transition">
+                                <div class="h-20 bg-gray-100">
+                                    <img src="{{ $accThumb }}" alt="{{ $accCat->name }}" class="w-full h-full object-cover">
+                                </div>
+                                <div class="p-2">
+                                    <p class="text-xs font-semibold text-gray-800 truncate">{{ $accCat->name }}</p>
+                                    <p class="text-[10px] text-gray-500">{{ $accCat->accessories_count ?? 0 }} món</p>
+                                </div>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
 
                 <a href="{{ route('posts.index') }}" class="px-2 py-2 rounded-lg font-medium {{ request()->routeIs('posts.*') ? 'text-orange-600 bg-orange-50' : 'text-gray-700 hover:bg-gray-50' }}">Tin Tức</a>

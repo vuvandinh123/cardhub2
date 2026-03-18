@@ -106,6 +106,11 @@ class Car extends Model
         return $this->hasMany(CarSpecification::class);
     }
 
+    public function accessories()
+    {
+        return $this->hasMany(Accessory::class);
+    }
+
     /* ==================== Accessors ==================== */
 
     /**

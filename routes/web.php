@@ -22,6 +22,11 @@ Route::get('/cars/search', [App\Http\Controllers\CarController::class, 'search']
 Route::get('cars/{slug}', [App\Http\Controllers\CarController::class, 'show'])->name('cars.show');
 Route::get('/cars', [App\Http\Controllers\CarController::class, 'index'])->name('cars.index');
 
+// Accessories Routes
+Route::get('/danh-muc-phu-kien', [App\Http\Controllers\AccessoryController::class, 'categories'])->name('accessories.categories.index');
+Route::get('/phu-kien', [App\Http\Controllers\AccessoryController::class, 'index'])->name('accessories.index');
+Route::get('/phu-kien/{accessory:slug}', [App\Http\Controllers\AccessoryController::class, 'show'])->name('accessories.show');
+
 
 // Consultation Request Routes
 Route::post('/consultation-request', [App\Http\Controllers\ConsultationRequestController::class, 'store'])->name('consultation.store');

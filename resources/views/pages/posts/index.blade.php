@@ -71,7 +71,7 @@
     <!-- Main content -->
     <section class="py-12 md:py-16 bg-gray-50">
         <div class="container max-w-7xl mx-auto px-4">
-            <div class="grid lg:grid-cols-12 gap-8">
+            <div class="grid lg:grid-cols-12 gap-4">
                 <!-- Filters / Sidebar -->
                 <aside class="lg:col-span-4 xl:col-span-3">
                     <div class="space-y-5 lg:sticky lg:top-28">

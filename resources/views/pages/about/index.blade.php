@@ -22,7 +22,7 @@
                         Về KIMAN
                     </p>
                     <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-                        Đối tác tin cậy trên hành trình tìm kiếm chiếc xe phù hợp của bạn
+                        Trung tâm 4S uỷ quyền sinotruk tại hồ chí minh, cung cấp xe tải nặng.
                     </h1>
                     <p class="text-gray-300 mt-4 text-base md:text-lg leading-relaxed">
                         KIMAN là đơn vị tư vấn & phân phối ô tô với quy trình minh bạch, chú trọng trải nghiệm

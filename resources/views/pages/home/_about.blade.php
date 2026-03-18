@@ -6,7 +6,7 @@
                 <div class="relative">
                     <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=600&h=700&fit=crop" alt="Showroom" class="rounded-2xl shadow-2xl">
                     <div class="absolute -bottom-6 -right-6 bg-orange-600 text-white p-8 rounded-2xl shadow-xl">
-                        <h3 class="text-4xl font-bold">15+</h3>
+                        <h3 class="text-4xl font-bold">10+</h3>
                         <p class="text-orange-100">Năm Uy Tín</p>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                     Đối Tác Tin Cậy Của <span class="text-orange-600">Doanh Nghiệp</span>
                 </h2>
                 <p class="text-gray-600 text-lg mb-6 leading-relaxed">
-                    TruckPro tự hào là đơn vị hàng đầu trong lĩnh vực phân phối xe đầu kéo cao cấp tại Việt Nam. Với hơn 15 năm kinh nghiệm, chúng tôi cam kết mang đến những sản phẩm chất lượng nhất cùng dịch vụ hậu mãi tận tâm.
+                    KIMAN tự hào là đơn vị hàng đầu trong lĩnh vực phân phối xe đầu kéo cao cấp tại Việt Nam. Với hơn 10 năm kinh nghiệm, chúng tôi cam kết mang đến những sản phẩm chất lượng nhất cùng dịch vụ hậu mãi tận tâm.
                 </p>
 
                 <div class="space-y-4 mb-8">

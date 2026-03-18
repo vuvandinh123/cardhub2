@@ -49,6 +49,18 @@ class CarRepository
         }
         
         // Filter by categories
+        if (!empty($filters['category'])) {
+            $query->whereHas('categories', function ($q) use ($filters) {
+                $q->where('categories.slug', $filters['category']);
+            });
+        }
+
+        if (!empty($filters['category_id'])) {
+            $query->whereHas('categories', function ($q) use ($filters) {
+                $q->where('categories.id', $filters['category_id']);
+            });
+        }
+
         if (!empty($filters['categories']) && is_array($filters['categories'])) {
             $query->whereHas('categories', function($q) use ($filters) {
                 $q->whereIn('categories.id', $filters['categories']);

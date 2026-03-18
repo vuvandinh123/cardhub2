@@ -213,11 +213,15 @@
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <span class="mt-1 w-2 h-2 rounded-full bg-orange-500"></span>
-                                    <span>{{ $car->engine ?: 'Động cơ đang cập nhật' }}</span>
+                                    <span>{{ $car->horsepower ? 'Mã lực ' . $car->horsepower : 'Mã lực đang cập nhật' }}</span>
                                 </li>
                                 <li class="flex items-start gap-2">
                                     <span class="mt-1 w-2 h-2 rounded-full bg-orange-500"></span>
-                                    <span>{{ $car->fuel ?: 'Nhiên liệu đang cập nhật' }}</span>
+                                    <span>{{ $car->torque ? 'Mô men xoắn ' . $car->torque : 'Mô men xoắn đang cập nhật' }}</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="mt-1 w-2 h-2 rounded-full bg-orange-500"></span>
+                                    <span>{{ $car->fuel_consumption ? 'Tiêu hao NL ' . $car->fuel_consumption : 'Tiêu hao NL đang cập nhật' }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -280,8 +284,16 @@
                                         <td class="text-gray-700">{{ $car->engine ?? 'Đang cập nhật' }}</td>
                                     </tr>
                                     <tr class="bg-gray-50">
-                                        <td class="font-semibold text-gray-700">Số chỗ</td>
-                                        <td class="text-gray-700">{{ $car->seats ? $car->seats . ' chỗ' : 'Đang cập nhật' }}</td>
+                                        <td class="font-semibold text-gray-700">Mã lực</td>
+                                        <td class="text-gray-700">{{ $car->horsepower ?? 'Đang cập nhật' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="font-semibold text-gray-700">Mô men xoắn</td>
+                                        <td class="text-gray-700">{{ $car->torque ?? 'Đang cập nhật' }}</td>
+                                    </tr>
+                                    <tr class="bg-gray-50">
+                                        <td class="font-semibold text-gray-700">Tiêu hao NL</td>
+                                        <td class="text-gray-700">{{ $car->fuel_consumption ?? 'Đang cập nhật' }}</td>
                                     </tr>
                                     @if($car->mileage !== null)
                                         <tr>
@@ -322,16 +334,16 @@
                                     <p class="font-bold text-gray-800">{{ $car->year ?? '—' }}</p>
                                 </div>
                                 <div class="bg-gray-50 rounded-2xl p-4">
-                                    <p class="text-xs text-gray-500">Số chỗ</p>
-                                    <p class="font-bold text-gray-800">{{ $car->seats ? $car->seats . ' chỗ' : '—' }}</p>
+                                    <p class="text-xs text-gray-500">Mã lực</p>
+                                    <p class="font-bold text-gray-800">{{ $car->horsepower ?? '—' }}</p>
                                 </div>
                                 <div class="bg-gray-50 rounded-2xl p-4">
-                                    <p class="text-xs text-gray-500">Nhiên liệu</p>
-                                    <p class="font-bold text-gray-800">{{ $car->fuel ?? '—' }}</p>
+                                    <p class="text-xs text-gray-500">Mô men xoắn</p>
+                                    <p class="font-bold text-gray-800">{{ $car->torque ?? '—' }}</p>
                                 </div>
                                 <div class="bg-gray-50 rounded-2xl p-4">
-                                    <p class="text-xs text-gray-500">Số lượng</p>
-                                    <p class="font-bold text-gray-800">{{ $car->quantity ?? 0 }}</p>
+                                    <p class="text-xs text-gray-500">Tiêu hao NL</p>
+                                    <p class="font-bold text-gray-800">{{ $car->fuel_consumption ?? '—' }}</p>
                                 </div>
                             </div>
 
@@ -341,7 +353,7 @@
                                     Nhận tư vấn & báo giá
                                 </a>
                                 <div class="grid grid-cols-2 gap-3">
-                                    <a href="tel:1900xxxx"
+                                    <a href="tel:0961549241"
                                        class="w-full border border-gray-200 text-gray-800 py-3 rounded-xl font-semibold text-center hover:bg-gray-50 transition">
                                         Gọi hotline
                                     </a>
