@@ -7,6 +7,26 @@ Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->nam
 Route::get('/contact', [App\Http\Controllers\HomeController::class, 'contact'])->name('contact');
 Route::get('/loan-calculator', [App\Http\Controllers\HomeController::class, 'loan'])->name('loan.calculator');
 
+// SEO: robots + sitemap
+Route::get('/robots.txt', function () {
+    $content = "User-agent: *\n";
+    $content .= "Allow: /\n";
+    $content .= "Disallow: /admin\n";
+    $content .= "Disallow: /login\n";
+    $content .= "Disallow: /register\n";
+    $content .= "Disallow: /password\n";
+    $content .= "Sitemap: " . route('sitemaps.index') . "\n";
+
+    return response($content, 200)->header('Content-Type', 'text/plain');
+})->name('robots');
+
+Route::get('/sitemap.xml', [App\Http\Controllers\SitemapController::class, 'index'])->name('sitemaps.index');
+Route::get('/sitemaps/static.xml', [App\Http\Controllers\SitemapController::class, 'static'])->name('sitemaps.static');
+Route::get('/sitemaps/cars.xml', [App\Http\Controllers\SitemapController::class, 'cars'])->name('sitemaps.cars');
+Route::get('/sitemaps/posts.xml', [App\Http\Controllers\SitemapController::class, 'posts'])->name('sitemaps.posts');
+Route::get('/sitemaps/categories.xml', [App\Http\Controllers\SitemapController::class, 'categories'])->name('sitemaps.categories');
+Route::get('/sitemaps/accessories.xml', [App\Http\Controllers\SitemapController::class, 'accessories'])->name('sitemaps.accessories');
+
 // Categories Routes
 Route::get('/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
 Route::get('/categories/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');

@@ -5,23 +5,29 @@
     'meta_keywords' => 'default, keywords',
     'meta_author' => 'VŨ VĂN ĐỊNH',
     'meta_image' => asset('default-image.jpg'),
+    'canonical_url' => url()->current(),
+    'meta_type' => 'website',
     'meta_robots' => 'index, follow',
     'meta_googlebot' => 'index, follow',
     'meta_bingbot' => 'index, follow',
     'meta_yandex' => 'index, follow',
 ])
+<link rel="canonical" href="{{ $canonical_url }}">
 <meta name="description" content="{{ $meta_description }}">
 <meta name="keywords" content="{{ $meta_keywords }}">
 <meta name="author" content="{{ $meta_author }}">
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $meta_description }}">
-<meta property="og:type" content="website">
-<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="{{ $meta_type }}">
+<meta property="og:url" content="{{ $canonical_url }}">
 <meta property="og:image" content="{{ $meta_image }}">
+<meta property="og:site_name" content="{{ config('app.name', 'KIMAN') }}">
+<meta property="og:locale" content="vi_VN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $meta_description }}">
 <meta name="twitter:image" content="{{ $meta_image }}">
+<meta name="twitter:url" content="{{ $canonical_url }}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="{{ $meta_robots }}">
 <meta name="googlebot" content="{{ $meta_googlebot }}">
