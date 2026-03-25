@@ -7,7 +7,7 @@
         'title' => 'Trang chủ | KIMAN',
         'meta_description' => 'Welcome to the home page',
         'meta_keywords' => 'home, welcome',
-        'meta_image' => asset('default-image.jpg'),
+        'meta_image' => asset('images/logo.png'),
         'meta_robots' => 'index, follow',
         'meta_googlebot' => 'index, follow',
         'meta_bingbot' => 'index, follow',

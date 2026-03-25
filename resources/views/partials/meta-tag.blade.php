@@ -4,7 +4,7 @@
     'meta_description' => 'Default description',
     'meta_keywords' => 'default, keywords',
     'meta_author' => 'VŨ VĂN ĐỊNH',
-    'meta_image' => asset('default-image.jpg'),
+    'meta_image' => asset('images/logo.png'),
     'canonical_url' => url()->current(),
     'meta_type' => 'website',
     'meta_robots' => 'index, follow',

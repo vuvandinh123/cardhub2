@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="{{ asset('https://howokiman.vn/thumbs/206x40x2/upload/photo/2022-logo-chuan-03-6846.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/x-icon">
     <title>@yield('title')</title>
     @vite('resources/css/app.css')
     @yield('meta')

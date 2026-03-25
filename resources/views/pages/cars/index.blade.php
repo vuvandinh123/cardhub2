@@ -7,7 +7,7 @@
         'title' => 'Danh sách xe | KIMAN',
         'meta_description' => 'Danh sách xe đang có tại KIMAN – đa dạng dòng xe, thông tin minh bạch, tư vấn tận tâm.',
         'meta_keywords' => 'KIMAN, danh sách xe, xe đã qua sử dụng, xe mới',
-        'meta_image' => asset('default-image.jpg'),
+        'meta_image' => asset('images/logo.png'),
         'meta_robots' => 'index, follow',
         'meta_googlebot' => 'index, follow',
         'meta_bingbot' => 'index, follow',

@@ -7,7 +7,7 @@
         'title' => ($accessory->meta_title ?? $accessory->name) . ' | KIMAN',
         'meta_description' => $accessory->meta_description ?? $accessory->description ?? '',
         'meta_keywords' => $accessory->meta_keywords ?? '',
-        'meta_image' => $accessory->thumbnail ? asset('storage/' . $accessory->thumbnail) : asset('default-image.jpg'),
+        'meta_image' => $accessory->thumbnail ? asset('storage/' . $accessory->thumbnail) : asset('images/logo.png'),
     ])
 @endsection
 

@@ -4,7 +4,7 @@
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div id="about-image">
                 <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?w=600&h=700&fit=crop" alt="Showroom" class="rounded-2xl shadow-2xl">
+                    <img src="{{ asset("images/about.png") }}" alt="Showroom" class="rounded-2xl shadow-2xl">
                     <div class="absolute -bottom-6 -right-6 bg-orange-600 text-white p-8 rounded-2xl shadow-xl">
                         <h3 class="text-4xl font-bold">10+</h3>
                         <p class="text-orange-100">Năm Uy Tín</p>

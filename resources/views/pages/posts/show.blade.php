@@ -7,7 +7,7 @@
         'title' => $post->seo_title ?? $post->title,
         'meta_description' => $post->seo_description ?? $post->excerpt,
         'meta_keywords' => $post->seo_keywords ?? '',
-        'meta_image' => $post->thumbnail ?? asset('default-image.jpg'),
+        'meta_image' => $post->thumbnail ?? asset('images/logo.png'),
         'meta_robots' => 'index, follow',
     ])
 @endsection

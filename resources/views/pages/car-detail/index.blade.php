@@ -7,7 +7,7 @@
         'title' => ($car->meta_title ?? $car->title) . ' | KIMAN',
         'meta_description' => $car->meta_description ?? Str::limit(strip_tags($car->description ?? ''), 160),
         'meta_keywords' => $car->meta_keywords ?? '',
-        'meta_image' => $car->thumbnail ? asset('storage/' . $car->thumbnail) : asset('default-image.jpg'),
+        'meta_image' => $car->thumbnail ? asset('storage/' . $car->thumbnail) : asset('images/logo.png'),
         'meta_robots' => 'index, follow',
         'meta_googlebot' => 'index, follow',
         'meta_bingbot' => 'index, follow',

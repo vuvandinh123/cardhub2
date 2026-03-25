@@ -7,7 +7,7 @@
         'title' => 'Danh mục phụ kiện | KIMAN',
         'meta_description' => 'Khám phá các danh mục phụ kiện ô tô tại KIMAN.',
         'meta_keywords' => 'KIMAN, danh mục phụ kiện, phụ kiện ô tô',
-        'meta_image' => asset('default-image.jpg'),
+        'meta_image' => asset('images/logo.png'),
     ])
 @endsection
 

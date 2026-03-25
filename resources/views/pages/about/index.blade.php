@@ -6,7 +6,7 @@
         'title' => 'Giới thiệu | KIMAN',
         'meta_description' => 'Tìm hiểu về KIMAN – đơn vị tư vấn & phân phối ô tô với quy trình minh bạch, tận tâm và chuyên nghiệp.',
         'meta_keywords' => 'KIMAN, giới thiệu, tư vấn xe, ô tô',
-        'meta_image' => asset('storage/default-image.jpg'),
+        'meta_image' => asset('images/logo.png'),
     ])
 @endsection
 @section('content')
