@@ -42,15 +42,8 @@ class CategoryController extends Controller
      */
     public function show($slug)
     {
-        // Tìm category theo slug
-        $category = $this->categoryRepository->all()->where('slug', $slug)->first();
-        
-        if (!$category) {
-            abort(404);
-        }
+        $category = Category::query()->where('slug', $slug)->firstOrFail();
 
-        return view('pages.categories.show', [
-            'category' => $category
-        ]);
+        return redirect()->route('cars.index', ['category' => $category->slug]);
     }
 }

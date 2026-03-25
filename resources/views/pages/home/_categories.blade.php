@@ -16,7 +16,7 @@
         <div id="categories-grid" class="grid md:grid-cols-3 gap-8">
             @forelse ($categories as $category)
                 <div class="category-card group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition cursor-pointer">
-                    <a href="{{ route('categories.show', $category->slug) }}" class="block relative overflow-hidden">
+                    <a href="{{ route('cars.index', ['category' => $category->slug]) }}" class="block relative overflow-hidden">
                         <img src="{{ $category->thumbnail ? asset('storage/' . $category->thumbnail) : 'https://via.placeholder.com/600x400?text=' . urlencode($category->name) }}"
                              alt="{{ $category->name }}"
                              class="w-full h-64 object-contain group-hover:scale-110 transition duration-500">
@@ -27,7 +27,7 @@
                     </a>
                     <div class="p-6">
                         <p class="text-gray-600 mb-4">{{ $category->description ?? 'Khám phá các dòng xe thuộc danh mục ' . $category->name }}</p>
-                        <a href="{{ route('categories.show', $category->slug) }}" class="text-orange-600 font-semibold hover:text-orange-700 inline-flex items-center">
+                        <a href="{{ route('cars.index', ['category' => $category->slug]) }}" class="text-orange-600 font-semibold hover:text-orange-700 inline-flex items-center">
                             Xem chi tiết
                             <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
