@@ -8,6 +8,7 @@
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    <meta name="google-site-verification" content="NtlrOZr6mvgQ8TtVnwLVCdGyx0CTFYCDz7Wydc6BVYQ" />
     <title>@yield('title', config('app.name', 'KIMAN'))</title>
     @vite('resources/css/app.css')
     @yield('meta')
