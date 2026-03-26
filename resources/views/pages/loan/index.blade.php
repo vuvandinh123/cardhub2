@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Tính khoản vay mua xe - CarHub')
+@section('title', 'Tính khoản vay mua xe | KIMAN')
+
+@section('meta')
+    @include('partials.meta-tag', [
+        'title' => 'Tính khoản vay mua xe | KIMAN',
+        'meta_description' => 'Công cụ tính khoản vay mua xe tại KIMAN giúp ước tính trả trước, lãi suất và số tiền trả hàng tháng nhanh chóng.',
+        'meta_keywords' => 'KIMAN, tính khoản vay mua xe, vay mua xe, trả góp ô tô',
+        'meta_image' => asset('images/logo.png'),
+        'canonical_url' => route('loan.calculator'),
+        'meta_type' => 'website',
+        'meta_robots' => 'index, follow',
+    ])
+@endsection
 
 @section('content')
 <!-- Hero Section -->

@@ -8,6 +8,8 @@
         'meta_description' => $car->meta_description ?? Str::limit(strip_tags($car->description ?? ''), 160),
         'meta_keywords' => $car->meta_keywords ?? '',
         'meta_image' => $car->thumbnail ? asset('storage/' . $car->thumbnail) : asset('images/logo.png'),
+        'canonical_url' => route('cars.show', $car->slug),
+        'meta_type' => 'product',
         'meta_robots' => 'index, follow',
         'meta_googlebot' => 'index, follow',
         'meta_bingbot' => 'index, follow',

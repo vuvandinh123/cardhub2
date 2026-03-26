@@ -8,6 +8,8 @@
         'meta_description' => $accessory->meta_description ?? $accessory->description ?? '',
         'meta_keywords' => $accessory->meta_keywords ?? '',
         'meta_image' => $accessory->thumbnail ? asset('storage/' . $accessory->thumbnail) : asset('images/logo.png'),
+        'canonical_url' => route('accessories.show', $accessory->slug),
+        'meta_type' => 'product',
     ])
 @endsection
 

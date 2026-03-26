@@ -8,6 +8,8 @@
         'meta_description' => 'Danh sách phụ kiện ô tô tại KIMAN.',
         'meta_keywords' => 'KIMAN, phụ kiện ô tô, đồ chơi xe',
         'meta_image' => asset('images/logo.png'),
+        'canonical_url' => route('accessories.index'),
+        'meta_type' => 'website',
     ])
 @endsection
 

@@ -3,11 +3,18 @@
 @section('title', $post->seo_title ?? $post->title)
 
 @section('meta')
+    @php
+        $postMetaImage = $post->thumbnail
+            ? (preg_match('~^https?://~', $post->thumbnail) ? $post->thumbnail : asset('storage/' . ltrim($post->thumbnail, '/')))
+            : asset('images/logo.png');
+    @endphp
     @include('partials.meta-tag', [
         'title' => $post->seo_title ?? $post->title,
         'meta_description' => $post->seo_description ?? $post->excerpt,
         'meta_keywords' => $post->seo_keywords ?? '',
-        'meta_image' => $post->thumbnail ?? asset('images/logo.png'),
+        'meta_image' => $postMetaImage,
+        'canonical_url' => route('posts.show', $post->slug),
+        'meta_type' => 'article',
         'meta_robots' => 'index, follow',
     ])
 @endsection

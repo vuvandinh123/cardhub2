@@ -2,6 +2,18 @@
 
 @section('title', 'So sánh xe')
 
+@section('meta')
+    @include('partials.meta-tag', [
+        'title' => 'So sánh xe | KIMAN',
+        'meta_description' => 'So sánh chi tiết thông số kỹ thuật, giá bán và tính năng giữa các mẫu xe tại KIMAN.',
+        'meta_keywords' => 'KIMAN, so sánh xe, thông số xe, giá xe',
+        'meta_image' => asset('images/logo.png'),
+        'canonical_url' => route('cars.compare'),
+        'meta_type' => 'website',
+        'meta_robots' => 'noindex, follow',
+    ])
+@endsection
+
 @section('content')
 <div class="container mx-auto max-w-7xl px-4 py-8">
     <!-- Header -->

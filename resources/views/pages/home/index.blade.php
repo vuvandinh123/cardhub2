@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Trang chủ | KIMAN')
+@section('title', 'KIMAN - Đầu kéo HOWO, MAN, SHACMAN chính hãng')
 
 @section('meta')
     @include('partials.meta-tag', [
-        'title' => 'Trang chủ | KIMAN',
-        'meta_description' => 'Welcome to the home page',
-        'meta_keywords' => 'home, welcome',
+        'title' => 'KIMAN - Đầu kéo HOWO, MAN, SHACMAN chính hãng',
+        'meta_description' => 'KIMAN chuyên phân phối đầu kéo HOWO, MAN, SHACMAN chính hãng. Tư vấn tận tâm, thông số minh bạch, hỗ trợ nhanh chóng toàn quốc.',
+        'meta_keywords' => 'KIMAN, đầu kéo HOWO, đầu kéo MAN, đầu kéo SHACMAN, xe đầu kéo chính hãng',
         'meta_image' => asset('images/logo.png'),
+        'canonical_url' => url('/'),
         'meta_robots' => 'index, follow',
         'meta_googlebot' => 'index, follow',
         'meta_bingbot' => 'index, follow',

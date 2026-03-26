@@ -6,7 +6,9 @@
         'title' => 'Liên hệ | KIMAN',
         'meta_description' => 'Liên hệ với KIMAN để được tư vấn và hỗ trợ nhanh chóng trong việc lựa chọn và mua xe phù hợp.',
         'meta_keywords' => 'KIMAN, liên hệ, tư vấn, hỗ trợ, mua xe',
-        'meta_image' => asset('storage/default-image.jpg'),
+        'meta_image' => asset('images/logo.png'),
+        'canonical_url' => route('contact'),
+        'meta_type' => 'website',
     ])
 @endsection
 @section('content')

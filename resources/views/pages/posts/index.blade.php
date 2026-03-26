@@ -7,6 +7,8 @@
         'meta_description' => 'Tổng hợp bài viết, kinh nghiệm và cập nhật thị trường xe từ KIMAN.',
         'meta_keywords' => 'KIMAN, tin tức ô tô, kinh nghiệm mua xe, thị trường xe',
         'meta_image' => asset('images/logo.png'),
+        'canonical_url' => route('posts.index'),
+        'meta_type' => 'website',
         'meta_robots' => 'index, follow',
     ])
 @endsection

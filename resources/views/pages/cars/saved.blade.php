@@ -1,5 +1,19 @@
 @extends('layouts.app')
 
+@section('title', 'Xe đã lưu | KIMAN')
+
+@section('meta')
+    @include('partials.meta-tag', [
+        'title' => 'Xe đã lưu | KIMAN',
+        'meta_description' => 'Danh sách xe bạn đã lưu để xem lại, so sánh và liên hệ tư vấn nhanh tại KIMAN.',
+        'meta_keywords' => 'KIMAN, xe đã lưu, danh sách yêu thích, so sánh xe',
+        'meta_image' => asset('images/logo.png'),
+        'canonical_url' => route('cars.saved'),
+        'meta_type' => 'website',
+        'meta_robots' => 'noindex, follow',
+    ])
+@endsection
+
 @section('content')
 <div class="container max-w-7xl mt-10 mx-auto px-4 py-8">
     <!-- Header -->
