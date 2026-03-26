@@ -48,7 +48,8 @@ class SitemapController extends Controller
     public function cars(): Response
     {
         $urls = Car::query()
-            ->where('status', 'available')
+            ->whereNotNull('slug')
+            ->where('slug', '!=', '')
             ->latest('updated_at')
             ->get()
             ->map(fn(Car $car) => [
