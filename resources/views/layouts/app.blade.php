@@ -19,6 +19,18 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/framer-motion@11.0.8/dist/framer-motion.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZJLBMJ0ZLE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZJLBMJ0ZLE');
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -39,23 +51,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
         integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    
+
     <script>
-        const { motion } = window.Motion;
+        const {
+            motion
+        } = window.Motion;
 
         // Header scroll effect
         let lastScroll = 0;
         const header = document.getElementById('header');
-        
+
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            
+
             if (currentScroll > 100) {
                 header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
             } else {
                 header.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
             }
-            
+
             lastScroll = currentScroll;
         });
 
@@ -77,12 +91,12 @@
         // Slider animations
         const sliderContent = document.getElementById('slider-content');
         const sliderImage = document.getElementById('slider-image');
-        
+
         sliderContent.style.opacity = '0';
         sliderContent.style.transform = 'translateX(-50px)';
         sliderImage.style.opacity = '0';
         sliderImage.style.transform = 'translateX(50px)';
-        
+
         setTimeout(() => {
             sliderContent.style.transition = 'all 0.8s ease-out';
             sliderImage.style.transition = 'all 0.8s ease-out 0.2s';
@@ -95,12 +109,12 @@
         // About section animations
         const aboutImage = document.getElementById('about-image');
         const aboutContent = document.getElementById('about-content');
-        
+
         aboutImage.style.opacity = '0';
         aboutImage.style.transform = 'translateY(50px)';
         aboutContent.style.opacity = '0';
         aboutContent.style.transform = 'translateY(50px)';
-        
+
         observer.observe(aboutImage);
         observer.observe(aboutContent);
 
@@ -143,18 +157,18 @@
         // Contact animations
         const contactInfo = document.getElementById('contact-info');
         const contactForm = document.getElementById('contact-form');
-        
+
         contactInfo.style.opacity = '0';
         contactInfo.style.transform = 'translateX(-50px)';
         contactForm.style.opacity = '0';
         contactForm.style.transform = 'translateX(50px)';
-        
+
         observer.observe(contactInfo);
         observer.observe(contactForm);
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
@@ -172,7 +186,7 @@
             card.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px)';
             });
-            
+
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
             });
@@ -180,4 +194,5 @@
     </script>
     @yield('scripts')
 </body>
+
 </html>
