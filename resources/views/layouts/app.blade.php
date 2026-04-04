@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
-    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}" type="image/png">
-    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+    <link rel="icon" href="{{ asset('images/logo.png') }}?v=1.0.0" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}?v=1.0.0" type="image/png">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}?v=1.0.0">
     <meta name="google-site-verification" content="NtlrOZr6mvgQ8TtVnwLVCdGyx0CTFYCDz7Wydc6BVYQ" />
     <title>@yield('title', config('app.name', 'KIMAN'))</title>
     @vite('resources/css/app.css')
