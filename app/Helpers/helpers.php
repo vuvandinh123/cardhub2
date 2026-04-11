@@ -50,15 +50,27 @@ if (!function_exists('formatPriceShort')) {
 
         if ($price >= 1000000000) {
             $value = $price / 1000000000;
-            return number_format($value, 1, ',', '.') . 'tỷ';
+            $precision = fmod($value, 1.0) === 0.0 ? 0 : 1;
+            return number_format($value, $precision, ',', '.') . ' tỷ';
+        }
+
+        if ($price >= 100000000) {
+            $value = $price / 100000000;
+            $precision = fmod($value, 1.0) === 0.0 ? 0 : 1;
+            return number_format($value, $precision, ',', '.') . ' trăm triệu';
         }
         
         if ($price >= 1000000) {
             $value = $price / 1000000;
-            return number_format($value, 0, ',', '.') . 'tr';
+            $precision = $value >= 10 ? 0 : 1;
+            return number_format($value, $precision, ',', '.') . ' triệu';
         }
 
-        return number_format($price, 0, ',', '.') . 'đ';
+        if ($price >= 1000) {
+            return number_format($price / 1000, 0, ',', '.') . ' nghìn';
+        }
+
+        return number_format($price, 0, ',', '.') . ' đ';
     }
 }
 

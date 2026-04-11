@@ -74,6 +74,25 @@
             height: 100%;
             object-fit: contain;
         }
+
+        .right-column-scroll {
+            max-height: calc(100vh - 8rem);
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .right-column-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .right-column-scroll::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 999px;
+        }
+
+        .right-column-scroll::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
     </style>
 @endsection
 
@@ -318,7 +337,7 @@
 
                 <!-- Sticky summary / CTA -->
                 <div class="lg:col-span-5">
-                    <div class="lg:sticky lg:top-28 space-y-6">
+                    <div class="lg:sticky lg:top-28 right-column-scroll space-y-6">
                         <div class="bg-white rounded-3xl shadow-lg p-6">
                             <div class="flex items-start justify-between gap-4">
                                 <div>
@@ -350,10 +369,11 @@
                             </div>
 
                             <div class="flex flex-col gap-3 mt-6">
-                                <a href="{{ route('contact') }}"
+                                <button type="button"
+                                   id="openConsultationModal"
                                    class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl font-semibold text-center hover:from-orange-600 hover:to-orange-700 transition">
                                     Nhận tư vấn & báo giá
-                                </a>
+                                </button>
                                 <div class="grid grid-cols-2 gap-3">
                                     <a href="tel:0961549241"
                                        class="w-full border border-gray-200 text-gray-800 py-3 rounded-xl font-semibold text-center hover:bg-gray-50 transition">
@@ -367,11 +387,46 @@
                             </div>
                         </div>
 
-                        <div class="bg-white rounded-3xl shadow-lg p-6">
-                            <h3 class="text-lg font-bold text-gray-800 mb-3">Bạn cần hỗ trợ nhanh?</h3>
-                            <p class="text-gray-600 text-sm mb-4">
-                                Gửi thông tin, đội ngũ KIMAN sẽ liên hệ trong thời gian sớm nhất.
+                        <div class="bg-white rounded-3xl shadow-lg p-6 border border-orange-100">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Bạn cần hỗ trợ nhanh?</h3>
+                            <p class="text-gray-600 text-sm">
+                                Đội ngũ KIMAN sẵn sàng tư vấn cấu hình, giá lăn bánh và chính sách ưu đãi phù hợp cho bạn.
                             </p>
+                            <div class="grid grid-cols-2 gap-3 mt-4">
+                                <div class="bg-orange-50 rounded-xl p-3">
+                                    <p class="text-[11px] text-gray-500">Thời gian phản hồi</p>
+                                    <p class="text-sm font-bold text-orange-700">Trong giờ làm việc</p>
+                                </div>
+                                <div class="bg-gray-50 rounded-xl p-3">
+                                    <p class="text-[11px] text-gray-500">Tổng đài</p>
+                                    <p class="text-sm font-bold text-gray-800">0961 549 241</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 flex flex-col gap-2">
+                                <button type="button" id="openConsultationModalFromSupport"
+                                        class="w-full bg-gray-900 text-white py-2.5 rounded-xl font-semibold hover:bg-black transition">
+                                    Để lại thông tin tư vấn
+                                </button>
+                                <a href="tel:0961549241"
+                                   class="w-full border border-gray-200 text-gray-800 py-2.5 rounded-xl font-semibold text-center hover:bg-gray-50 transition">
+                                    Gọi ngay cho KIMAN
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="consultationModal" class="hidden fixed inset-0 z-[80]">
+                <div class="absolute inset-0 bg-black/50" data-modal-close></div>
+                <div class="relative min-h-full flex items-center justify-center p-4">
+                    <div class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
+                        <div class="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+                            <h3 class="text-lg font-bold text-gray-800">Nhận tư vấn báo giá</h3>
+                            <button type="button" class="text-gray-400 hover:text-gray-700" data-modal-close aria-label="Đóng">✕</button>
+                        </div>
+                        <div class="p-5">
+                            <p class="text-sm text-gray-600 mb-4">Vui lòng để lại thông tin, KIMAN sẽ liên hệ sớm nhất để tư vấn.</p>
                             @if(Route::has('consultation.store.car'))
                                 <form action="{{ route('consultation.store.car', $car) }}" method="POST" class="space-y-3">
                                     @csrf
@@ -380,8 +435,8 @@
                                     <input name="phone" type="tel" required placeholder="Số điện thoại"
                                            class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-orange-200 focus:border-orange-500 outline-none">
                                     <button type="submit"
-                                            class="w-full bg-gray-900 text-white py-3 rounded-xl font-semibold hover:bg-black transition">
-                                        Gửi yêu cầu
+                                            class="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-xl font-semibold hover:from-orange-600 hover:to-orange-700 transition">
+                                        Gửi yêu cầu tư vấn
                                     </button>
                                 </form>
                             @else
@@ -536,6 +591,40 @@
                     Carousel: {
                         transition: 'slide',
                     },
+                });
+            }
+
+            const consultationModal = document.getElementById('consultationModal');
+            const openButtons = [
+                document.getElementById('openConsultationModal'),
+                document.getElementById('openConsultationModalFromSupport'),
+            ].filter(Boolean);
+
+            const openModal = () => {
+                if (!consultationModal) return;
+                consultationModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            };
+
+            const closeModal = () => {
+                if (!consultationModal) return;
+                consultationModal.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            };
+
+            openButtons.forEach((button) => {
+                button.addEventListener('click', openModal);
+            });
+
+            if (consultationModal) {
+                consultationModal.querySelectorAll('[data-modal-close]').forEach((el) => {
+                    el.addEventListener('click', closeModal);
+                });
+
+                document.addEventListener('keydown', (event) => {
+                    if (event.key === 'Escape') {
+                        closeModal();
+                    }
                 });
             }
         });

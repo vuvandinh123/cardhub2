@@ -28,12 +28,18 @@
     // Featured cars grouped by category for mega menu
     $featuredCarsByCategory = [];
     foreach ($headerCategoriesTop as $cat) {
-        $featuredCarsByCategory[$cat->id] = Car::whereHas('categories', function ($q) use ($cat) {
-                $q->where('categories.id', $cat->id);
+        $children = $headerCategoriesChildren->get($cat->id) ?? collect();
+        $categoryIds = $children->pluck('id');
+
+        if ($categoryIds->isEmpty()) {
+            $categoryIds = collect([$cat->id]);
+        }
+
+        $featuredCarsByCategory[$cat->id] = Car::whereHas('categories', function ($q) use ($categoryIds) {
+                $q->whereIn('categories.id', $categoryIds->all());
             })
             ->with('brand')
             ->orderByDesc('created_at')
-            ->take(4)
             ->get();
     }
 @endphp
@@ -75,7 +81,7 @@
                                 @foreach($headerCategoriesTop as $cat)
                                     @php
                                         $children = $headerCategoriesChildren->get($cat->id) ?? collect();
-                                        $count = $cat->cars_count ?? 0;
+                                        $count = ($featuredCarsByCategory[$cat->id] ?? collect())->count();
                                     @endphp
                                     <a href="{{ route('cars.index', ['category' => $cat->slug]) }}"
                                        class="group/card rounded-xl overflow-hidden border border-gray-100 hover:border-orange-300 hover:shadow-lg transition-all duration-200">
@@ -137,7 +143,7 @@
                                            class="flex items-center gap-2 mb-2 pb-2 border-b border-gray-100 group/cat">
                                             <span class="w-2 h-2 rounded-full bg-orange-500 flex-shrink-0"></span>
                                             <span class="text-sm font-bold text-gray-800 group-hover/cat:text-orange-600 transition">{{ $cat->name }}</span>
-                                            <span class="text-[10px] text-gray-400 ml-auto">{{ $cat->cars_count ?? 0 }} xe</span>
+                                            <span class="text-[10px] text-gray-400 ml-auto">{{ $catCars->count() }} xe</span>
                                         </a>
                                         @if($catCars->count())
                                             <ul class="space-y-1">
@@ -150,7 +156,7 @@
                                                                 <p class="text-[10px] text-gray-400">{{ $car->brand->name ?? '' }}</p>
                                                             </div>
                                                             <span class="text-[11px] font-semibold text-orange-600 whitespace-nowrap">
-                                                                {{ $car->formatted_price }}
+                                                                {{ formatPriceShort($car->price) }}
                                                             </span>
                                                         </a>
                                                     </li>
@@ -264,6 +270,7 @@
                 <div class="hidden pb-2" data-mobile-submenu="categories">
                     <div class="flex gap-3 overflow-x-auto py-2 px-1 -mx-1 scrollbar-thin">
                         @foreach($headerCategoriesTop as $cat)
+                            @php $catCars = $featuredCarsByCategory[$cat->id] ?? collect(); @endphp
                             <a href="{{ route('cars.index', ['category' => $cat->slug]) }}"
                                class="flex-shrink-0 w-32 rounded-xl overflow-hidden border border-gray-100 hover:border-orange-300 transition">
                                 <div class="h-20 bg-gray-100 overflow-hidden">
@@ -273,7 +280,7 @@
                                 </div>
                                 <div class="p-2">
                                     <p class="text-xs font-semibold text-gray-800 truncate">{{ $cat->name }}</p>
-                                    <p class="text-[10px] text-gray-500">{{ $cat->cars_count ?? 0 }} xe</p>
+                                    <p class="text-[10px] text-gray-500">{{ $catCars->count() }} xe</p>
                                 </div>
                             </a>
                         @endforeach
@@ -296,12 +303,12 @@
                                class="flex items-center gap-2 px-3 py-1.5 text-xs font-bold text-gray-800">
                                 <span class="w-1.5 h-1.5 rounded-full bg-orange-500"></span>
                                 {{ $cat->name }}
-                                <span class="text-[10px] text-gray-400 font-normal">({{ $cat->cars_count ?? 0 }})</span>
+                                <span class="text-[10px] text-gray-400 font-normal">({{ $catCars->count() }})</span>
                             </a>
                             @foreach($catCars->take(3) as $car)
                                 <a href="{{ route('cars.show', $car->slug) }}"
                                    class="block px-6 py-1 text-[11px] text-gray-600 hover:text-orange-600 truncate">
-                                    {{ $car->title }} — <span class="text-orange-600 font-medium">{{ $car->formatted_price }}</span>
+                                    {{ $car->title }} — <span class="text-orange-600 font-medium">{{ formatPriceShort($car->price) }}</span>
                                 </a>
                             @endforeach
                         </div>
