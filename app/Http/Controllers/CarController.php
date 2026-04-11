@@ -36,7 +36,7 @@ class CarController extends Controller
             'search' => $request->input('search'),
             'condition' => $request->input('condition'),
             'brand_id' => $request->input('brand_id'),
-            'category' => $request->input('category'), // slug
+            'category' => $request->input('category', $request->input('catgory')), // slug (support typo: ?catgory=...)
             'category_id' => $request->input('category_id'), // single id
             'categories' => $request->input('categories', []),
             'price_min' => $request->input('price_min'),

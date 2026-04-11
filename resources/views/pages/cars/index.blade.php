@@ -103,13 +103,41 @@
                 @php
                     $view = request('view', 'list');
                     $currentSort = $filters['sort_by'] ?? 'newest';
+                    $currentCategory = $filters['category'] ?? '';
+                    $topCategories = collect($categories)->whereNull('parent_id');
+                    $childCategories = collect($categories)->groupBy('parent_id');
                 @endphp
 
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
                     <h2 class="text-lg md:text-2xl font-extrabold text-gray-900">
                         {{ $cars->total() }} xe đang hiển thị
                     </h2>
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 flex-wrap justify-end">
+                        <form method="GET" action="{{ route('cars.index') }}" class="flex items-center">
+                            @foreach(request()->except(['category', 'catgory', 'page']) as $key => $value)
+                                @if(is_array($value))
+                                    @foreach($value as $item)
+                                        <input type="hidden" name="{{ $key }}[]" value="{{ $item }}">
+                                    @endforeach
+                                @else
+                                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                                @endif
+                            @endforeach
+                            <select name="category" onchange="this.form.submit()"
+                                    class="px-3 py-2 rounded-xl border border-gray-200 bg-white text-xs md:text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-500">
+                                <option value="">Tất cả danh mục</option>
+                                @foreach($topCategories as $category)
+                                    <option value="{{ $category->slug }}" {{ $currentCategory === $category->slug ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                    @foreach(($childCategories->get($category->id) ?? collect()) as $child)
+                                        <option value="{{ $child->slug }}" {{ $currentCategory === $child->slug ? 'selected' : '' }}>
+                                            — {{ $child->name }}
+                                        </option>
+                                    @endforeach
+                                @endforeach
+                            </select>
+                        </form>
                         <div class="hidden md:inline-flex rounded-xl border border-gray-200 bg-white overflow-hidden text-xs">
                             <a href="{{ route('cars.index', array_merge(request()->except('view', 'page'), ['view' => 'list'])) }}"
                                class="px-3 py-2 font-semibold {{ $view === 'list' ? 'bg-gray-900 text-white' : 'text-gray-700 hover:bg-gray-100' }}">

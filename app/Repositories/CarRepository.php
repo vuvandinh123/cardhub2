@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Car;
+use App\Models\Category;
 
 class CarRepository
 {
@@ -50,9 +51,34 @@ class CarRepository
         
         // Filter by categories
         if (!empty($filters['category'])) {
-            $query->whereHas('categories', function ($q) use ($filters) {
-                $q->where('categories.slug', $filters['category']);
-            });
+            $category = Category::query()->where('slug', $filters['category'])->first();
+
+            if ($category) {
+                $categoryIds = [$category->id];
+                $parentIds = [$category->id];
+
+                while (!empty($parentIds)) {
+                    $childIds = Category::query()
+                        ->whereIn('parent_id', $parentIds)
+                        ->pluck('id')
+                        ->all();
+
+                    if (empty($childIds)) {
+                        break;
+                    }
+
+                    $categoryIds = array_values(array_unique(array_merge($categoryIds, $childIds)));
+                    $parentIds = $childIds;
+                }
+
+                $query->whereHas('categories', function ($q) use ($categoryIds) {
+                    $q->whereIn('categories.id', $categoryIds);
+                });
+            } else {
+                $query->whereHas('categories', function ($q) use ($filters) {
+                    $q->where('categories.slug', $filters['category']);
+                });
+            }
         }
 
         if (!empty($filters['category_id'])) {
