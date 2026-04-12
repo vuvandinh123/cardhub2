@@ -45,7 +45,7 @@
 </head>
 
 <body class="bg-gray-50 overflow-x-hidden">
-    <div class="pt">
+    <div class="pt overflow-x-hidden max-w-screen">
         @yield('content')
     </div>
     @include('partials.floating-contacts')
